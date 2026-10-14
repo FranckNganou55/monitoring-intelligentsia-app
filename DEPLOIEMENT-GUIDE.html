@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide de Déploiement - Monitoring Monétique</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #1a1a1a; background: #fff; line-height: 1.6; }
+
+  @media print {
+    body { font-size: 11px; }
+    .no-print { display: none; }
+    .page-break { page-break-before: always; }
+    section { break-inside: avoid; }
+    pre { font-size: 9px; }
+  }
+
+  .cover {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 80px 60px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cover .badge {
+    background: #C9A84C;
+    color: #1a1a1a;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+  .cover h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+  .cover h2 { font-size: 16px; font-weight: 400; opacity: 0.75; margin-bottom: 32px; }
+  .cover-meta { display: flex; gap: 40px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 24px; margin-top: 24px; }
+  .cover-meta div { display: flex; flex-direction: column; }
+  .cover-meta .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; margin-bottom: 2px; }
+  .cover-meta .value { font-size: 14px; font-weight: 600; color: #C9A84C; }
+
+  .toc {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px 32px;
+    margin: 32px 40px;
+  }
+  .toc h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b7280; margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { padding: 3px 0; color: #374151; }
+  .toc li a { color: #374151; text-decoration: none; }
+  .toc li a:hover { color: #C9A84C; }
+  .toc .sub { font-size: 11px; color: #6b7280; margin-left: 8px; }
+
+  .content { padding: 0 40px 40px; }
+
+  h2.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    border-bottom: 3px solid #C9A84C;
+    padding-bottom: 8px;
+    margin: 40px 0 20px;
+  }
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #C9A84C;
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  h3.step {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 28px 0 10px;
+  }
+
+  p { margin-bottom: 10px; color: #374151; }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 10px 0 16px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    border-left: 3px solid #C9A84C;
+  }
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 11px;
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+
+  .comment { color: #64748b; }
+  .cmd { color: #86efac; }
+  .kw { color: #f9a8d4; }
+  .str { color: #fde68a; }
+  .val { color: #93c5fd; }
+
+  .callout {
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 14px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { flex: 1; }
+  .callout-title { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
+  .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .callout.info .callout-title { color: #1d4ed8; }
+  .callout.info .callout-icon::before { content: 'ℹ️'; }
+  .callout.warn { background: #fffbeb; border: 1px solid #fde68a; }
+  .callout.warn .callout-title { color: #92400e; }
+  .callout.warn .callout-icon::before { content: '⚠️'; }
+  .callout.success { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .callout.success .callout-title { color: #166534; }
+  .callout.success .callout-icon::before { content: '✅'; }
+  .callout.danger { background: #fff1f2; border: 1px solid #fecdd3; }
+  .callout.danger .callout-title { color: #9f1239; }
+  .callout.danger .callout-icon::before { content: '🔒'; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 12px;
+  }
+  th {
+    background: #1f2937;
+    color: #f9fafb;
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+  }
+  tr:nth-child(even) td { background: #f9fafb; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .tag.green { background: #dcfce7; color: #166534; }
+  .tag.blue  { background: #dbeafe; color: #1e40af; }
+  .tag.amber { background: #fef3c7; color: #92400e; }
+
+  .checklist { list-style: none; padding: 0; margin: 10px 0; }
+  .checklist li { padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; }
+  .checklist li::before { content: '☐'; font-size: 14px; color: #9ca3af; flex-shrink: 0; }
+
+  footer {
+    background: #f8f9fa;
+    border-top: 1px solid #e5e7eb;
+    padding: 16px 40px;
+    font-size: 11px;
+    color: #9ca3af;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #C9A84C;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 100;
+  }
+  .print-btn:hover { background: #b8963f; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Enregistrer en PDF</button>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="badge">Guide de Déploiement</div>
+  <h1>Monitoring Monétique</h1>
+  <h2>Plateforme de surveillance des GABs, TPE, transactions et fraude</h2>
+  <div class="cover-meta">
+    <div>
+      <span class="label">Serveur cible</span>
+      <span class="value">172.25.2.53</span>
+    </div>
+    <div>
+      <span class="label">Port application</span>
+      <span class="value">8089</span>
+    </div>
+    <div>
+      <span class="label">Stack</span>
+      <span class="value">Spring Boot 3.4 + React 18</span>
+    </div>
+    <div>
+      <span class="label">Base de données</span>
+      <span class="value">PostgreSQL 16</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE DES MATIERES -->
+<div class="toc">
+  <h3>Table des matières</h3>
+  <ol>
+    <li><a href="#prereqs">Prérequis serveur</a></li>
+    <li><a href="#postgres">Installation et configuration PostgreSQL</a></li>
+    <li><a href="#deploy">Déploiement du JAR</a></li>
+    <li><a href="#service">Installation comme service Windows (NSSM)</a></li>
+    <li><a href="#verify">Vérification et tests</a></li>
+    <li><a href="#env">Variables d'environnement avancées</a></li>
+    <li><a href="#updates">Procédure de mise à jour</a></li>
+    <li><a href="#troubleshoot">Résolution des problèmes courants</a></li>
+  </ol>
+</div>
+
+<div class="content">
+
+<!-- SECTION 1 -->
+<h2 class="section-title" id="prereqs">1. Prérequis serveur</h2>
+
+<p>Avant de déployer, vérifiez que le serveur Windows <strong>172.25.2.53</strong> dispose des éléments suivants :</p>
+
+<table>
+  <tr><th>Composant</th><th>Version minimale</th><th>Statut</th><th>Notes</th></tr>
+  <tr><td>Java Runtime (JRE)</td><td>17+</td><td><span class="tag amber">À installer</span></td><td>Ou JDK 17/21</td></tr>
+  <tr><td>PostgreSQL</td><td>16</td><td><span class="tag amber">À installer</span></td><td>Port 5432</td></tr>
+  <tr><td>Oracle SVFE</td><td>—</td><td><span class="tag green">Déjà en place</span></td><td>172.25.2.53:1521 base cmstest</td></tr>
+  <tr><td>Port 8089</td><td>—</td><td><span class="tag amber">À ouvrir</span></td><td>Pare-feu Windows</td></tr>
+  <tr><td>NSSM</td><td>2.24+</td><td><span class="tag amber">Optionnel</span></td><td>Pour démarrage auto</td></tr>
+</table>
+
+<h3 class="step"><span class="step-number">A</span> Installer Java 17</h3>
+<p>Téléchargez Eclipse Temurin 17 (JRE suffit, JDK recommandé) depuis <code>https://adoptium.net</code> et installez-le.</p>
+<p>Vérification après installation :</p>
+<pre><code><span class="cmd">java -version</span>
+<span class="comment"># Attendu : openjdk version "17.x.x" ...</span></code></pre>
+
+<h3 class="step"><span class="step-number">B</span> Ouvrir le port 8089 dans le pare-feu Windows</h3>
+<p>Dans PowerShell en tant qu'Administrateur :</p>
+<pre><code><span class="cmd">New-NetFirewallRule</span> -DisplayName <span class="str">"Monitoring App 8089"</span> `
+  -Direction Inbound -Protocol TCP -LocalPort 8089 -Action Allow</code></pre>
+
+
+<!-- SECTION 2 -->
+<div class="page-break"></div>
+<h2 class="section-title" id="postgres">2. Installation et configuration PostgreSQL</h2>
+
+<h3 class="step"><span class="step-number">1</span> Installer PostgreSQL 16</h3>
+<p>Téléchargez l'installeur depuis <code>https://www.postgresql.org/download/windows/</code>.</p>
+<p>Pendant l'installation, notez bien le mot de passe que vous définissez pour l'utilisateur <code>postgres</code>.</p>
+
+<div class="callout info">
+  <div class="callout-icon"></div>
+  <div class="callout-body">
+    <div class="callout-title">Port par défaut</div>
+    PostgreSQL s'installe sur le port <strong>5432</strong> par défaut. L'application est configurée pour utiliser ce port.
+  </div>
+</div>
+
+<h3 class="step"><span class="step-number">2</span> Créer la base de données et l'utilisateur</h3>
+<p>Ouvrez <strong>pgAdmin</strong> (installé avec PostgreSQL) ou connectez-vous via la ligne de commande :</p>
+<pre><code><span class="comment"># Ouvrir psql en tant qu'admin</span>
+<span class="cmd">psql -U postgres</span></code></pre>
+
+<p>Puis exécutez ces commandes SQL :</p>
+<pre><code><span class="comment">-- Créer l'utilisateur applicatif</span>
+<span class="kw">CREATE USER</span> monitoring <span class="kw">WITH PASSWORD</span> <span class="str">'monitoring'</span>;
+
+<span class="comment">-- Créer la base de données</span>
+<span class="kw">CREATE DATABASE</span> monitoring
+  <span class="kw">WITH OWNER</span> monitoring
+  <span class="kw">ENCODING</span> <span class="str">'UTF8'</span>
+  <span class="kw">LC_COLLATE</span> <span class="str">'French_France.1252'</span>
+  <span class="kw">LC_CTYPE</span> <span class="str">'French_France.1252'</span>
+  <span class="kw">TEMPLATE</span> template0;
+
+<span class="comment">-- Accorder les droits</span>
+<span class="kw">GRANT ALL PRIVILEGES ON DATABASE</span> monitoring <span class="kw">TO</span> monitoring;
+
+<span class="comment">-- Vérifier</span>
+<span class="kw">\l</span> monitoring</code></pre>
+
+<div class="callout success">
+  <div class="callout-icon"></div>
+  <div class="callout-body">
+    <div class="callout-title">Flyway crée les tables automatiquement</div>
+    Vous n'avez PAS besoin de créer les tables manuellement. Au premier démarrage, Flyway exécute automatiquement les migrations (V1 à V12) et crée toute la structure ainsi que les données initiales (rôles, utilisateur admin).
+  </div>
+</div>
+
+<h3 class="step"><span class="step-number">3</span> Ouvrir PostgreSQL aux connexions locales</h3>
+<p>Par défaut PostgreSQL n'accepte les connexions que depuis localhost. Comme l'application tourne sur le même serveur, aucune modification n'est nécessaire.</p>
+<p>Si vous avez besoin de vous connecter depuis une autre machine (ex: pgAdmin depuis votre poste), éditez <code>pg_hba.conf</code> :</p>
+<pre><code><span class="comment"># Chemin typique Windows :</span>
+<span class="comment"># C:\Program Files\PostgreSQL\16\data\pg_hba.conf</span>
+
+<span class="comment"># Ajouter cette ligne pour autoriser le réseau interne :</span>
+host    all    all    172.25.0.0/16    md5</code></pre>
+<p>Puis redémarrer le service : <code>net stop postgresql-x64-16 && net start postgresql-x64-16</code></p>
+
+
+<!-- SECTION 3 -->
+<div class="page-break"></div>
+<h2 class="section-title" id="deploy">3. Déploiement du JAR</h2>
+
+<h3 class="step"><span class="step-number">1</span> Créer le dossier de déploiement</h3>
+<pre><code><span class="comment"># Sur le serveur, créer la structure</span>
+<span class="cmd">mkdir</span> C:\monitoring
+<span class="cmd">mkdir</span> C:\monitoring\logs</code></pre>
+
+<h3 class="step"><span class="step-number">2</span> Copier le JAR</h3>
+<p>Depuis votre poste de développement, copiez le fichier :</p>
+<pre><code><span class="comment"># Depuis votre poste (PowerShell ou Explorateur Windows)</span>
+<span class="comment"># Chemin source :</span>
+D:\Intelligentsia\Monitoring\app\application-monitoring\backend\target\monitoring-backend-1.0.0-SNAPSHOT.jar
+
+<span class="comment"># Destination sur le serveur :</span>
+C:\monitoring\monitoring-backend.jar</code></pre>
+
+<div class="callout info">
+  <div class="callout-icon"></div>
+  <div class="callout-body">
+    <div class="callout-title">Renommer le JAR</div>
+    Pour simplifier les commandes, renommez le JAR en <code>monitoring-backend.jar</code> (sans le numéro de version).
+  </div>
+</div>
+
+<h3 class="step"><span class="step-number">3</span> Premier démarrage (test manuel)</h3>
+<p>Ouvrez PowerShell en Administrateur sur le serveur et lancez :</p>
+<pre><code><span class="cmd">cd</span> C:\monitoring
+
+<span class="cmd">java</span> -jar monitoring-backend.jar `
+  --spring.profiles.active=prod `
+  --spring.datasource.url=jdbc:postgresql://localhost:5432/monitoring `
+  --spring.datasource.username=monitoring `
+  --spring.datasource.password=monitoring</code></pre>
+
+<p>Attendez de voir ces lignes dans la console :</p>
+<pre><code><span class="comment">INFO  --- [main] o.s.b.w.e.t.TomcatWebServer : Tomcat started on port(s): 8089</span>
+<span class="comment">INFO  --- [main] o.i.m.MonitoringApplication : Started MonitoringApplication</span></code></pre>
+
+<h3 class="step"><span class="step-number">4</span> Vérifier l'accès</h3>
+<p>Depuis n'importe quel navigateur sur le réseau :</p>
+<pre><code>http://172.25.2.53:8089</code></pre>
+<p>Identifiants par défaut :</p>
+<table>
+  <tr><th>Champ</th><th>Valeur</th></tr>
+  <tr><td>Login</td><td><code>admin</code></td></tr>
+  <tr><td>Mot de passe</td><td><code>Admin123!</code></td></tr>
+</table>
+
+<div class="callout danger">
+  <div class="callout-icon"></div>
+  <div class="callout-body">
+    <div class="callout-title">Changez le mot de passe admin dès la première connexion</div>
+    Le compte admin initial doit être sécurisé immédiatement via le module Administration → Utilisateurs.
+  </div>
+</div>
+
+
+<!-- SECTION 4 -->
+<div class="page-break"></div>
+<h2 class="section-title" id="service">4. Installation comme service Windows (NSSM)</h2>
+
+<p>NSSM (Non-Sucking Service Manager) permet de démarrer l'application automatiquement au boot du serveur et de la relancer en cas de crash.</p>
+
+<h3 class="step"><span class="step-number">1</span> Télécharger et installer NSSM</h3>
+<pre><code><span class="comment"># Télécharger NSSM depuis https://nssm.cc/download</span>
+<span class="comment"># Extraire et copier nssm.exe dans C:\Windows\System32\</span>
+
+<span class="comment"># Ou via Chocolatey (si installé) :</span>
+<span class="cmd">choco install nssm</span></code></pre>
+
+<h3 class="step"><span class="step-number">2</span> Créer le service</h3>
+<pre><code><span class="comment"># En PowerShell Administrateur :</span>
+<span class="cmd">nssm install</span> MonitoringApp
+
+<span class="comment"># Renseigner dans l'interface graphique qui s'ouvre :</span>
+<span class="comment">#   Application Path : C:\Program Files\Eclipse Adoptium\jre-17\bin\java.exe</span>
+<span class="comment">#   Startup directory : C:\monitoring</span>
+<span class="comment">#   Arguments        : voir ci-dessous</span></code></pre>
+
+<p>Arguments du service (copiez en une seule ligne) :</p>
+<pre><code>-jar C:\monitoring\monitoring-backend.jar --spring.profiles.active=prod</code></pre>
+
+<h3 class="step"><span class="step-number">3</span> Configurer les logs du service</h3>
+<p>Dans l'onglet <strong>I/O</strong> de NSSM :</p>
+<table>
+  <tr><th>Champ</th><th>Valeur</th></tr>
+  <tr><td>Stdout</td><td><code>C:\monitoring\logs\app.log</code></td></tr>
+  <tr><td>Stderr</td><td><code>C:\monitoring\logs\app-error.log</code></td></tr>
+</table>
+
+<h3 class="step"><span class="step-number">4</span> Gérer le service</h3>
+<pre><code><span class="comment"># Démarrer</span>
+<span class="cmd">nssm start</span> MonitoringApp
+<span class="comment"># ou</span>
+<span class="cmd">net start</span> MonitoringApp
+
+<span class="comment"># Arrêter</span>
+<span class="cmd">nssm stop</span> MonitoringApp
+
+<span class="comment"># Redémarrer</span>
+<span class="cmd">nssm restart</span> MonitoringApp
+
+<span class="comment"># Supprimer le service</span>
+<span class="cmd">nssm remove</span> MonitoringApp confirm
+
+<span class="comment"># Voir le statut</span>
+<span class="cmd">Get-Service</span> MonitoringApp</code></pre>
+
+
+<!-- SECTION 5 -->
+<div class="page-break"></div>
+<h2 class="section-title" id="verify">5. Vérification et tests</h2>
+
+<h3 class="step"><span class="step-number">1</span> Vérifier que l'application répond</h3>
+<pre><code><span class="comment"># Depuis le serveur (PowerShell) :</span>
+<span class="cmd">Invoke-WebRequest</span> http://localhost:8089/actuator/health
+
+<span class="comment"># Réponse attendue :</span>
+<span class="str">{"status":"UP"}</span></code></pre>
+
+<h3 class="step"><span class="step-number">2</span> Vérifier la connexion PostgreSQL</h3>
+<pre><code><span class="comment"># Dans les logs de démarrage, chercher :</span>
+HikariPool-1 - Start completed.
+<span class="comment"># Ou vérifier via psql :</span>
+<span class="cmd">psql -U monitoring -d monitoring -c</span> <span class="str">"\dt"</span>
+<span class="comment"># Doit lister toutes les tables créées par Flyway</span></code></pre>
+
+<h3 class="step"><span class="step-number">3</span> Vérifier la connexion Oracle SVFE</h3>
+<pre><code><span class="comment"># Dans les logs, chercher :</span>
+INFO  SvfeDataSourceConfig - Oracle SVFE datasource initialized
+<span class="comment"># Si erreur de connexion Oracle, vérifier :</span>
+<span class="comment">#   - Que le port 1521 est accessible depuis ce serveur</span>
+<span class="comment">#   - Test ping : ping 172.25.2.53</span>
+<span class="comment">#   - Test port : Test-NetConnection 172.25.2.53 -Port 1521</span></code></pre>
+
+<h3 class="step"><span class="step-number">4</span> Tester l'authentification</h3>
+<pre><code><span class="comment"># Test API login (PowerShell) :</span>
+<span class="cmd">Invoke-RestMethod</span> -Uri http://localhost:8089/api/auth/login `
+  -Method POST `
+  -ContentType <span class="str">"application/json"</span> `
+  -Body <span class="str">'{"login":"admin","password":"Admin123!"}'</span>
+
+<span class="comment"># Réponse attendue : { "accessToken": "eyJ...", "refreshToken": "...", ... }</span></code></pre>
+
+<h3 class="step"><span class="step-number">5</span> Accès depuis un navigateur</h3>
+<p>Ouvrez <code>http://172.25.2.53:8089</code> depuis n'importe quel poste du réseau interne. La page de login doit s'afficher.</p>
+
+
+<!-- SECTION 6 -->
+<h2 class="section-title" id="env">6. Variables d'environnement avancées</h2>
+
+<p>Les valeurs par défaut du profil <code>prod</code> sont suffisantes pour le démarrage. Pour renforcer la sécurité en production, définissez ces variables d'environnement Windows <em>avant</em> de lancer le service :</p>
+
+<table>
+  <tr><th>Variable</th><th>Valeur par défaut</th><th>Description</th></tr>
+  <tr><td><code>DB_URL</code></td><td>jdbc:postgresql://172.25.2.53:5432/monitoring</td><td>URL JDBC PostgreSQL</td></tr>
+  <tr><td><code>DB_USER</code></td><td>monitoring</td><td>Utilisateur PostgreSQL</td></tr>
+  <tr><td><code>DB_PASS</code></td><td>monitoring</td><td>Mot de passe PostgreSQL</td></tr>
+  <tr><td><code>SVFE_DB_URL</code></td><td>jdbc:oracle:thin:@172.25.2.53:1521:cmstest</td><td>URL Oracle SVFE</td></tr>
+  <tr><td><code>SVFE_DB_USER</code></td><td>mxp</td><td>Utilisateur Oracle</td></tr>
+  <tr><td><code>SVFE_DB_PASS</code></td><td>mxp</td><td>Mot de passe Oracle</td></tr>
+  <tr><td><code>JWT_SECRET</code></td><td>(valeur par défaut)</td><td><strong>À changer en production !</strong></td></tr>
+  <tr><td><code>CORS_ORIGINS</code></td><td>http://172.25.2.53:8089</td><td>Origines CORS autorisées</td></tr>
+</table>
+
+<p>Pour définir une variable d'environnement Windows de façon permanente (PowerShell Administrateur) :</p>
+<pre><code><span class="cmd">[System.Environment]::SetEnvironmentVariable</span>(<span class="str">"JWT_SECRET"</span>, <span class="str">"votre-secret-64-chars-minimum-ici"</span>, <span class="str">"Machine"</span>)
+<span class="comment"># "Machine" = persistant pour tous les utilisateurs et services</span>
+<span class="comment"># Redémarrer le service après modification</span></code></pre>
+
+
+<!-- SECTION 7 -->
+<div class="page-break"></div>
+<h2 class="section-title" id="updates">7. Procédure de mise à jour</h2>
+
+<p>Pour déployer une nouvelle version de l'application :</p>
+
+<h3 class="step"><span class="step-number">1</span> Générer le nouveau JAR (poste de développement)</h3>
+<pre><code><span class="cmd">cd</span> D:\Intelligentsia\Monitoring\app\application-monitoring
+<span class="cmd">.\build-prod.ps1</span>
+<span class="comment"># Le JAR est dans : backend\target\monitoring-backend-1.0.0-SNAPSHOT.jar</span></code></pre>
+
+<h3 class="step"><span class="step-number">2</span> Arrêter le service</h3>
+<pre><code><span class="cmd">nssm stop</span> MonitoringApp
+<span class="comment"># ou si démarré manuellement : Ctrl+C dans la fenêtre PowerShell</span></code></pre>
+
+<h3 class="step"><span class="step-number">3</span> Sauvegarder l'ancien JAR</h3>
+<pre><code><span class="cmd">Rename-Item</span> C:\monitoring\monitoring-backend.jar `
+  C:\monitoring\monitoring-backend.jar.bak</code></pre>
+
+<h3 class="step"><span class="step-number">4</span> Copier le nouveau JAR</h3>
+<pre><code><span class="comment"># Copier depuis votre poste vers le serveur :</span>
+monitoring-backend-1.0.0-SNAPSHOT.jar  →  C:\monitoring\monitoring-backend.jar</code></pre>
+
+<h3 class="step"><span class="step-number">5</span> Redémarrer le service</h3>
+<pre><code><span class="cmd">nssm start</span> MonitoringApp</code></pre>
+
+<div class="callout warn">
+  <div class="callout-icon"></div>
+  <div class="callout-body">
+    <div class="callout-title">Migrations Flyway automatiques</div>
+    Si la nouvelle version contient des migrations SQL (nouveaux fichiers V13, V14...), Flyway les appliquera automatiquement au démarrage. <strong>Ne supprimez jamais les anciens fichiers de migration.</strong>
+  </div>
+</div>
+
+
+<!-- SECTION 8 -->
+<h2 class="section-title" id="troubleshoot">8. Résolution des problèmes courants</h2>
+
+<table>
+  <tr><th>Symptôme</th><th>Cause probable</th><th>Solution</th></tr>
+  <tr>
+    <td>Page blanche ou erreur 404 à /</td>
+    <td>Le frontend n'est pas dans le JAR</td>
+    <td>Relancer <code>build-prod.ps1</code> (étape 2 : copie dist/ vers static/)</td>
+  </tr>
+  <tr>
+    <td>Erreur "Connection refused" PostgreSQL</td>
+    <td>Service PostgreSQL arrêté</td>
+    <td><code>net start postgresql-x64-16</code></td>
+  </tr>
+  <tr>
+    <td>Login échoue (mauvais mdp)</td>
+    <td>Migration seed non exécutée</td>
+    <td>Vérifier les logs Flyway au démarrage. Supprimer la DB et redémarrer.</td>
+  </tr>
+  <tr>
+    <td>Déconnexion après redémarrage</td>
+    <td>Comportement normal</td>
+    <td>L'app invalide toutes les sessions au redémarrage. Se reconnecter.</td>
+  </tr>
+  <tr>
+    <td>Erreur Oracle "ORA-12541"</td>
+    <td>Oracle inaccessible (port 1521)</td>
+    <td><code>Test-NetConnection 172.25.2.53 -Port 1521</code>. Vérifier le listener Oracle.</td>
+  </tr>
+  <tr>
+    <td>Port 8089 inaccessible</td>
+    <td>Pare-feu Windows bloque</td>
+    <td>Voir section 1-B (ouvrir le port avec New-NetFirewallRule)</td>
+  </tr>
+  <tr>
+    <td>Erreur "Address already in use"</td>
+    <td>Un autre processus utilise 8089</td>
+    <td><code>netstat -ano | findstr 8089</code> puis <code>taskkill /PID xxx /F</code></td>
+  </tr>
+  <tr>
+    <td>Flyway error: checksum mismatch</td>
+    <td>Fichier de migration modifié</td>
+    <td>Ne jamais modifier un fichier V*.sql existant. Créer un nouveau Vn+1__fix.sql</td>
+  </tr>
+</table>
+
+<h3 class="step"><span class="step-number">■</span> Consulter les logs en temps réel</h3>
+<pre><code><span class="comment"># Si service NSSM :</span>
+<span class="cmd">Get-Content</span> C:\monitoring\logs\app.log -Wait -Tail 100
+
+<span class="comment"># Si démarré manuellement : les logs s'affichent dans la console PowerShell</span></code></pre>
+
+<h3 class="step"><span class="step-number">■</span> Checklist avant déploiement</h3>
+<ul class="checklist">
+  <li>Java 17+ installé sur le serveur (<code>java -version</code>)</li>
+  <li>PostgreSQL 16 démarré, base "monitoring" et utilisateur "monitoring" créés</li>
+  <li>Port 8089 ouvert dans le pare-feu Windows</li>
+  <li>Accès réseau à Oracle sur 172.25.2.53:1521 vérifié</li>
+  <li>JAR copié dans C:\monitoring\monitoring-backend.jar</li>
+  <li>Premier démarrage testé en mode manuel (console) avant installation en service</li>
+  <li>Page http://172.25.2.53:8089 accessible depuis un autre poste</li>
+  <li>Connexion admin réussie et mot de passe changé</li>
+</ul>
+
+</div><!-- .content -->
+
+<footer>
+  <span>Monitoring Monétique — Guide de Déploiement</span>
+  <span>Serveur : 172.25.2.53 · Port : 8089 · Stack : Spring Boot 3.4 + React 18 + PostgreSQL 16</span>
+</footer>
+
+</body>
+</html>

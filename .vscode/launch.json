@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MonitoringApplication<monitoring-backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "org.intelligentsia.monitoring.MonitoringApplication",
+            "projectName": "monitoring-backend",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

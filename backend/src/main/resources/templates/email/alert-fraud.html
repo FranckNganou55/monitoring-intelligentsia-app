@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head><meta charset="UTF-8"><title>Alerte Fraude</title>
+<style>
+body{font-family:Arial,sans-serif;background:#F5F5F5;margin:0;padding:0}
+.container{max-width:600px;margin:40px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header{background:#2C2C2C;padding:32px;text-align:center}
+.header h1{color:#C9A84C;margin:0}
+.alert-banner{background:#F59E0B;color:#fff;padding:12px 24px;text-align:center;font-weight:bold}
+.body{padding:32px;color:#4A4A4A}
+.stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F5F5F5}
+.footer{background:#F5F5F5;padding:16px;text-align:center;font-size:12px;color:#999}
+</style></head>
+<body>
+<div class="container">
+  <div class="header"><h1>Monitoring Monétique</h1></div>
+  <div class="alert-banner">&#9888; ALERTE FRAUDE DÉTECTÉE</div>
+  <div class="body">
+    <h2>Détection de fraude</h2>
+    <div class="stat"><span>BIN</span><strong th:text="${bin}">123456</strong></div>
+    <div class="stat"><span>Institution</span><strong th:text="${institution}">BANK</strong></div>
+    <div class="stat"><span>Transactions frauduleuses</span><strong th:text="${fraudCount}">0</strong></div>
+    <p style="margin-top:20px">Veuillez consulter le tableau de bord pour plus de détails.</p>
+  </div>
+  <div class="footer">© 2026 Monitoring Monétique — Intelligentsia</div>
+</div>
+</body></html>

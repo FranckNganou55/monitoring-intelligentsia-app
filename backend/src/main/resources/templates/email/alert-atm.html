@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head><meta charset="UTF-8"><title>Alerte ATM</title>
+<style>
+body{font-family:Arial,sans-serif;background:#F5F5F5;margin:0;padding:0}
+.container{max-width:600px;margin:40px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header{background:#2C2C2C;padding:32px;text-align:center}
+.header h1{color:#C9A84C;margin:0}
+.alert-banner{background:#EF4444;color:#fff;padding:12px 24px;text-align:center;font-weight:bold}
+.body{padding:32px;color:#4A4A4A}
+.footer{background:#F5F5F5;padding:16px;text-align:center;font-size:12px;color:#999}
+</style></head>
+<body>
+<div class="container">
+  <div class="header"><h1>Monitoring Monétique</h1></div>
+  <div class="alert-banner">&#9888; ALERTE ATM</div>
+  <div class="body">
+    <h2>Terminal : <span th:text="${terminalId}">TRM001</span></h2>
+    <p th:text="${message}">Message d'alerte</p>
+    <p>Veuillez vérifier l'état de ce terminal dans la plateforme de monitoring.</p>
+  </div>
+  <div class="footer">© 2026 Monitoring Monétique — Intelligentsia</div>
+</div>
+</body></html>

@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: monitoring_postgres_dev
+    environment:
+      POSTGRES_DB: monitoring_dev
+      POSTGRES_USER: neo-monitoring
+      POSTGRES_PASSWORD: monitoring123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: monitoring_mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  postgres_dev_data:

@@ -1,0 +1,9 @@
+
+# Private local configuration, account hashes and encrypted SMTP secret
+/backend/local-config/
+
+backend/target/
+backend/.m2-check/
+backend/tmp/
+node_modules/
+*.log

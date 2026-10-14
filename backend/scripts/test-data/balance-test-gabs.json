@@ -1,0 +1,452 @@
+[
+  {
+    "institution": "00043",
+    "terminalId": "TEST-BALANCE-108401001",
+    "codeGab": 1067780,
+    "numeroGab": "108401001",
+    "nomGab": "GAB N1 HAI CINEMA",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 244,
+        "billetsRejetes": 9,
+        "billetsDispenses": 47,
+        "soldeCassette": 24400,
+        "derniereMaj": "2025-06-21T08:44:35"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 163,
+        "billetsRejetes": 6,
+        "billetsDispenses": 31,
+        "soldeCassette": 16300,
+        "derniereMaj": "2025-06-21T08:44:35"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 171,
+        "billetsRejetes": 25,
+        "billetsDispenses": 4,
+        "soldeCassette": 17100,
+        "derniereMaj": "2025-06-18T14:36:21"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 161,
+        "billetsRejetes": 29,
+        "billetsDispenses": 10,
+        "soldeCassette": 16100,
+        "derniereMaj": "2025-06-18T14:36:21"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00043",
+    "terminalId": "TEST-BALANCE-108401002",
+    "codeGab": 1069780,
+    "numeroGab": "108401002",
+    "nomGab": "GAB N2 HAI CINEMA",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 375,
+        "billetsRejetes": 1,
+        "billetsDispenses": 124,
+        "soldeCassette": 37500,
+        "derniereMaj": "2026-04-11T11:58:01"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 314,
+        "billetsRejetes": 1,
+        "billetsDispenses": 85,
+        "soldeCassette": 31400,
+        "derniereMaj": "2026-04-11T11:58:01"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-28T18:18:42"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-28T18:18:42"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00001",
+    "terminalId": "TEST-BALANCE-108401003",
+    "codeGab": 1069820,
+    "numeroGab": "108401003",
+    "nomGab": "GAB N1 AIRPORT",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 281,
+        "billetsRejetes": 1,
+        "billetsDispenses": 18,
+        "soldeCassette": 28100,
+        "derniereMaj": "2026-04-11T11:58:02"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2024-11-05T17:33:20"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2024-06-11T10:14:54"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2024-06-11T10:14:54"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00043",
+    "terminalId": "TEST-BALANCE-108401004",
+    "codeGab": 1074200,
+    "numeroGab": "108401004",
+    "nomGab": "ATM N1 SHERIKAT",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2024-08-23T11:59:38"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2024-08-23T11:59:38"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2024-08-23T11:59:38"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2024-08-23T11:59:39"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00001",
+    "terminalId": "TEST-BALANCE-108401005",
+    "codeGab": 1074220,
+    "numeroGab": "108401005",
+    "nomGab": "ATM N2 SHERIKAT",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 91,
+        "billetsRejetes": 1,
+        "billetsDispenses": 108,
+        "soldeCassette": 9100,
+        "derniereMaj": "2026-04-10T16:53:39"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-03T11:50:19"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-03T11:50:19"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-03T11:50:19"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00043",
+    "terminalId": "TEST-BALANCE-108401006",
+    "codeGab": 1074240,
+    "numeroGab": "108401006",
+    "nomGab": "ATM N3 SHERIKAT",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 184,
+        "billetsRejetes": 2,
+        "billetsDispenses": 14,
+        "soldeCassette": 18400,
+        "derniereMaj": "2025-06-18T14:55:06"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-06T11:15:52"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2024-12-07T09:15:25"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2024-12-07T09:15:25"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00001",
+    "terminalId": "TEST-BALANCE-108401007",
+    "codeGab": 1078200,
+    "numeroGab": "108401007",
+    "nomGab": "ATM GUDELE 21",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 130,
+        "billetsRejetes": 1,
+        "billetsDispenses": 69,
+        "soldeCassette": 13000,
+        "derniereMaj": "2026-04-10T09:26:54"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-20T14:15:01"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-20T14:15:02"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-20T14:15:02"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00043",
+    "terminalId": "TEST-BALANCE-108401008",
+    "codeGab": 1078600,
+    "numeroGab": "108401008",
+    "nomGab": "ATM GUDELE 22",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2025-03-26T12:37:56"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2025-03-26T12:37:56"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2025-03-26T12:37:56"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": null,
+        "billetsRejetes": null,
+        "billetsDispenses": null,
+        "soldeCassette": null,
+        "derniereMaj": "2025-03-26T12:37:56"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  },
+  {
+    "institution": "00001",
+    "terminalId": "TEST-BALANCE-108401009",
+    "codeGab": 1083800,
+    "numeroGab": "108401009",
+    "nomGab": "ATM KONYO KONYO",
+    "cassettes": [
+      {
+        "cassetteNum": 1,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 26,
+        "billetsRejetes": 2,
+        "billetsDispenses": 72,
+        "soldeCassette": 2600,
+        "derniereMaj": "2026-04-07T17:34:07"
+      },
+      {
+        "cassetteNum": 2,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 26,
+        "billetsRejetes": 6,
+        "billetsDispenses": 68,
+        "soldeCassette": 2600,
+        "derniereMaj": "2026-04-08T15:58:53"
+      },
+      {
+        "cassetteNum": 3,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-25T16:22:13"
+      },
+      {
+        "cassetteNum": 4,
+        "devise": "28",
+        "valeurBillet": 100,
+        "billetsRestants": 0,
+        "billetsRejetes": 0,
+        "billetsDispenses": 0,
+        "soldeCassette": 0,
+        "derniereMaj": "2025-06-25T16:22:13"
+      }
+    ],
+    "source": "TEST_EXCEL"
+  }
+]

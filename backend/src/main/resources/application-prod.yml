@@ -1,0 +1,85 @@
+# ─── Profil PRODUCTION — serveur interne 172.25.2.53 ─────────────────────────
+# Activer avec : --spring.profiles.active=prod
+# Surcharger les secrets via variables d'environnement (voir .env.example)
+
+spring:
+  datasource:
+    url:      ${DB_URL:jdbc:postgresql://172.25.2.53:5432/monitoring}
+    username: ${DB_USER:monitoring}
+    password: ${DB_PASS:monitoring}
+
+  jpa:
+    show-sql: false
+
+  # Désactiver Flyway baseline — la DB de prod doit être initialisée proprement
+  flyway:
+    baseline-on-migrate: false
+
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:25}
+    username: ${MAIL_USER:}
+    password: ${MAIL_PASS:}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_AUTH:false}
+          starttls:
+            enable: ${MAIL_STARTTLS:false}
+
+app:
+  # JWT — utiliser une chaine aleatoire longue en production (min 64 caracteres)
+  jwt:
+    secret: ${JWT_SECRET:CHANGEME_utilisez_une_variable_env_secrete_de_64_chars_minimum_1234}
+
+  # CORS — en prod le frontend est embarqué dans le JAR, même origine
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://172.25.2.53:8089}
+
+  # Oracle SVFE (lecture seule — base de test cmstest)
+  svfe:
+    enabled: true
+    datasource:
+      # Format SID          : jdbc:oracle:thin:@HOST:PORT:SID
+      # Format service name : jdbc:oracle:thin:@//HOST:PORT/SERVICE_NAME
+      url:               ${SVFE_DB_URL:jdbc:oracle:thin:@192.168.203.231:1528:cmsprod}
+      username:          ${SVFE_DB_USER:applimonit}
+      password:          ${SVFE_DB_PASS:M1Passw0rd2020}
+      driver-class-name: oracle.jdbc.OracleDriver
+
+  settings:
+    encryption-key:  ${SETTINGS_ENCRYPTION_KEY:changeThisKeyInProd32CharsMin!}
+    encryption-salt: ${SETTINGS_ENCRYPTION_SALT:deadbeefcafebabe}
+
+logging:
+  file:
+    name: ${LOG_FILE:monitoring.log}
+  logback:
+    rollingpolicy:
+      max-file-size: 20MB
+      max-history: 7
+      total-size-cap: 100MB
+  level:
+    root: WARN
+    "[org.intelligentsia]": INFO
+    "[org.springframework.security]": WARN
+    "[org.hibernate.SQL]": WARN
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    mail:
+      enabled: false
+
+# Swagger désactivé en production (décommenter pour le réactiver)
+# springdoc:
+#   swagger-ui:
+#     enabled: false
+#   api-docs:
+#     enabled: false
